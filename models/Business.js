@@ -1,47 +1,34 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 // Define collection and schema for Business
-let KC = new Schema({
-product_name: {
+let ProductList = new Schema({
+item_type: {
 type: String
 },
-category_name: {
+KC_Code: {
 type: String
 },
-material_name: {
+product: {
+type: String
+},
+fabric: {
+type: String
+},
+work_type: {
 type: String
 },
 price: {
 type: Number
 },
-description: {
-type: String
-},
-fileupload: {
-type: String
-// data: Buffer,
-// contentType: String
-},
+ fileupload: {
+ type: String,
+ },
 },{
 collection: 'productlist'
 });
-var KC1 = mongoose.model('KC', KC);
+var ProductList1 = mongoose.model('KC', ProductList);
 
-
-let AdLoginDetails = new Schema({
-    user_name: {
-      type: String
-    },
-    user_password: {
-      type: String
-    }
-  },{
-      collection: 'adlogindetails'
-  });
-  
-  var AdLoginDetails1 = mongoose.model('AdLoginDetails', AdLoginDetails);
 
   module.exports = {
-    KC:KC1,
-    AdLoginDetails:AdLoginDetails1
+    ProductList:ProductList1,
   };

@@ -6,6 +6,7 @@ const express = require('express'),
     config = require('./DB');
 
 const businessRoute = require('./routes/business.route');
+const loginRoute = require('./routes/login.route');
 
 //chnges by hetal on 21-2-19
 //mongoose.Promise = global.Promise;
@@ -25,12 +26,14 @@ app.use(cors({credentials: false}));
 
 app.use(express.static(path.join(__dirname,'public')));
 
+app.use(express.static(path.join(__dirname,'/img_uploads')));
+
+app.use('/KC', loginRoute);
+app.use('/KC', businessRoute);
+
 app.get('*',(req,res)=>{
   res.sendFile(path.join(__dirname,'public/index.html'))
 })
-
-//app.use('/AdLoginDetails', businessRoute);
-app.use('/KC', businessRoute);
 
 
 const port = process.env.PORT || 8080;
