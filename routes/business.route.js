@@ -9,8 +9,10 @@ let  { ProductList }  = require('../models/Business');
 
 var store = multer.diskStorage({
   destination:function(req,file,cb){
-  
-    cb(null, '../KC-Backend/img_uploads');
+     //local
+    //cb(null, '../KC-Backend/img_uploads');
+    //Build
+    cb(null, '../public/upload/');
   },
   filename:function(req,file,cb){
       cb(null, Date.now()+'.'+file.originalname);
