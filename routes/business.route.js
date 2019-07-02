@@ -12,7 +12,7 @@ var store = multer.diskStorage({
      //local
     //cb(null, '../KC-Backend/img_uploads');
     //Build
-    cb(null, '../public/upload/');
+    cb(null, '../public/img_uploads/');
   },
   filename:function(req,file,cb){
       cb(null, Date.now()+'.'+file.originalname);
