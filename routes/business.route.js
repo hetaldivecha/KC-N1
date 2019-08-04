@@ -1,36 +1,38 @@
 const express = require('express');
 const app = express();
 const businessRoutes = express.Router();
-const multer = require('multer');
-
+//const multer = require('multer');
+const upload = require('../file-upload');
 // Require Business model in our routes module
 let  { ProductList }  = require('../models/Business');
 
 
-var store = multer.diskStorage({
-  destination:function(req,file,cb){
-     //local
-    //cb(null, './public/assets/');
-    //Build
-    cb(null, './public/assets/');
-  },
-  filename:function(req,file,cb){
-      cb(null, Date.now()+'.'+file.originalname);
-  }
-});
+// var store = multer.diskStorage({
+//   destination:function(req,file,cb){
+    
+//     cb(null, './public/assets/');
+//   },
+//   filename:function(req,file,cb){
+//       cb(null, Date.now()+'.'+file.originalname);
+//   }
+// });
 
 
-var upload = multer({storage:store}).single('file');
+
+
+//var upload = multer({storage:store}).single('file');
+
+var singleupload = upload.single('photo');
 
 businessRoutes.post('/uploads', function(req,res){
   console.log("req"+req);
-  upload(req,res,function(err){
+  singleupload(req,res,function(err){
       if(err){
           return res.status(501).json({error:err});
       }
       //do all database record saving activity
       console.log("req.file"+JSON.stringify(req.file))
-      return res.json({originalname:req.file.originalname, uploadname:req.file.filename,path:req.file.path});
+      return res.json({originalname:req.file.originalname, uploadname:req.file.filename,imageUrl:req.file.location});
   });
 });
 
